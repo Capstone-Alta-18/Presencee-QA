@@ -24,8 +24,8 @@ import java.util.Map;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-public class APIStepDefinitions {
-    String baseURL = "https://altashop-api.fly.dev/api/";
+public class PresenceeStepDefinitions {
+    String baseURL = "http://testing.biaracmpny.my.id/v1/";
     User user = new User();
     //code untuk memperoleh token dari respons API
 
@@ -177,14 +177,6 @@ public class APIStepDefinitions {
         user.setToken(response.path("data"));
     }
 
-    @Given("{actor} get product by id")
-    public void userGetProductById(Actor actor) {
-        actor.whoCan(CallAnApi.at(baseURL));
-        JSONObject bodyRequest = new JSONObject();
-
-        actor.attemptsTo(Get.resource("products/13393").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
-    }
-
     @Given("{actor} is assign a product rating")
     public void userIsAssignAProductRating(Actor actor) {
         actor.whoCan(CallAnApi.at(baseURL));
@@ -195,17 +187,6 @@ public class APIStepDefinitions {
 
         actor.attemptsTo(Post.to("products/13393/ratings").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
 
-    }
-
-    @Given("{actor} is create a comment for product")
-    public void userIsCreateACommentForProduct(Actor actor) {
-        actor.whoCan(CallAnApi.at(baseURL));
-
-        JSONObject bodyRequest = new JSONObject();
-
-        bodyRequest.put("content", "the games are great including Gran Turismo 7 but sadly GT4 is much better");
-
-        actor.attemptsTo(Post.to("products/11676/comments").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
     }
 
     @Given("{actor} is create a new order")
@@ -245,18 +226,6 @@ public class APIStepDefinitions {
         actor.attemptsTo(Get.resource("orders/10252").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(jsonArrayWrapper).log().all()));
     }
 
-    @Given("{actor} is create a new category")
-    public void userIsCreateANewCategory(Actor actor) {
-        actor.whoCan(CallAnApi.at(baseURL));
-        JSONObject bodyRequest = new JSONObject();
-
-        bodyRequest.put("name", "gaming");
-        bodyRequest.put("description", "for gaming purposes");
-
-        actor.attemptsTo(Post.to("categories").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
-
-    }
-
     @Given("{actor} get product category by ID")
     public void userGetProductCategoryByID(Actor actor) {
         actor.whoCan(CallAnApi.at(baseURL));
@@ -265,6 +234,4 @@ public class APIStepDefinitions {
         actor.attemptsTo(Get.resource("categories/12563").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
 
     }
-
-
 }
