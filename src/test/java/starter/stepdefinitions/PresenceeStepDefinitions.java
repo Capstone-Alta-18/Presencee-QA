@@ -51,13 +51,6 @@ public class PresenceeStepDefinitions {
                 throw new IllegalStateException("Unknown method");
         }
     }
-
-    @Then("{actor} verify response is match with json schema {string}")
-    public void userVerifyResponseIsMatchWithJsonSchema(Actor actor, String schema) {
-        Response response = SerenityRest.lastResponse();
-        response.then().body(matchesJsonSchemaInClasspath(schema));
-    }
-
     @Then("{actor} verify status code is {int}")
     public void userVerifyStatusCodeIs(Actor actor, int statusCode) {
         Response response = SerenityRest.lastResponse();
@@ -133,7 +126,7 @@ public class PresenceeStepDefinitions {
                 actor.attemptsTo(Post.to(path).with(request -> request.body(bodyRequest).log().all()));
                 break;
             case "PUT":
-                actor.attemptsTo(Put.to(path).with(request -> request.body(bodyRequest)));
+                actor.attemptsTo(Put.to(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
                 break;
             case "DELETE":
                 actor.attemptsTo(Delete.from(path));
@@ -141,14 +134,6 @@ public class PresenceeStepDefinitions {
             default:
                 throw new IllegalStateException("Unknown method");
         }
-    }
-
-    @Given("{actor} get other users information")
-    public void getOtherUsersInformation(Actor actor) {
-
-        actor. whoCan(CallAnApi.at(baseURL));
-        actor.attemptsTo(Get.resource("auth/info")
-                        .with(request -> request.header("Authorization", "Bearer " + user.getToken()).log().all()));
     }
 
     @Given("{actor} is create a new product")
@@ -173,22 +158,9 @@ public class PresenceeStepDefinitions {
 
     @And("{actor} get auth token")
     public void userGetAuthToken(Actor actor) {
-        Response response = SerenityRest. lastResponse();
-        user.setToken(response.path("data"));
+        Response response = SerenityRest.lastResponse();
+        user.setToken(response.path("token"));
     }
-
-    @Given("{actor} is assign a product rating")
-    public void userIsAssignAProductRating(Actor actor) {
-        actor.whoCan(CallAnApi.at(baseURL));
-
-        JSONObject bodyRequest = new JSONObject();
-
-        bodyRequest.put("count", 4);
-
-        actor.attemptsTo(Post.to("products/13393/ratings").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
-
-    }
-
     @Given("{actor} is create a new order")
     public void userIsCreateANewOrder(Actor actor) {
         actor.whoCan(CallAnApi.at(baseURL));
@@ -215,23 +187,17 @@ public class PresenceeStepDefinitions {
         actor.attemptsTo(Get.resource("orders").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(jsonArrayWrapper).log().all()));
     }
 
-    @Given("{actor} get all order by ID")
-    public void userGetAllOrderByID(Actor actor) {
+    @Given("{actor} get page users")
+    public void userGetPageUsers(Actor actor) {
         actor.whoCan(CallAnApi.at(baseURL));
         JSONObject bodyRequest = new JSONObject();
-        JSONArray jsonArrayWrapper = new JSONArray();
-        System.out.println(jsonArrayWrapper);
-        jsonArrayWrapper.add(bodyRequest);
-
-        actor.attemptsTo(Get.resource("orders/10252").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(jsonArrayWrapper).log().all()));
+        actor.attemptsTo(Get.resource("users").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
     }
 
-    @Given("{actor} get product category by ID")
-    public void userGetProductCategoryByID(Actor actor) {
+    @Given("{actor} get their information by ID")
+    public void userGetTheirInformationByID(Actor actor) {
         actor.whoCan(CallAnApi.at(baseURL));
         JSONObject bodyRequest = new JSONObject();
-
-        actor.attemptsTo(Get.resource("categories/12563").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
-
+        actor.attemptsTo(Get.resource("users/:user_id").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
     }
 }
