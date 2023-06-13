@@ -97,6 +97,14 @@ public class PresenceeStepDefinitions {
                     user.setFullName(randomFullname);
                     break;
                 }
+                case "user_id": {
+                    String randomUserIdString = valueList.get(key);
+                    int randomUserId = Integer.parseInt(randomUserIdString);
+                    bodyRequest.put(key, randomUserId);
+                    user.setUserId(String.valueOf(randomUserId));
+                    break;
+                }
+
                 case "randomProductName":
                     bodyRequest.put(key, faker.commerce().productName());
                     break;
@@ -120,16 +128,22 @@ public class PresenceeStepDefinitions {
 
         switch (method) {
             case "GET":
-                actor.attemptsTo(Get.resource(path));
+                if (headerList.get(0).equals("path_variable")) {
+                    path = path+"/"+valueList.get("path_variable");
+                }
+                actor.attemptsTo(Get.resource(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
                 break;
             case "POST":
-                actor.attemptsTo(Post.to(path).with(request -> request.body(bodyRequest).log().all()));
+                actor.attemptsTo(Post.to(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
                 break;
             case "PUT":
                 actor.attemptsTo(Put.to(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
                 break;
             case "DELETE":
-                actor.attemptsTo(Delete.from(path));
+                if (headerList.get(0).equals("path_variable")) {
+                    path = path+"/"+valueList.get("path_variable");
+                }
+                actor.attemptsTo(Delete.from(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
                 break;
             default:
                 throw new IllegalStateException("Unknown method");
@@ -175,18 +189,6 @@ public class PresenceeStepDefinitions {
 
         actor.attemptsTo(Post.to("orders").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(jsonArrayWrapper).log().all()));
     }
-
-    @Given("{actor} get all order")
-    public void userGetAllOrder(Actor actor) {
-        actor.whoCan(CallAnApi.at(baseURL));
-        JSONObject bodyRequest = new JSONObject();
-        JSONArray jsonArrayWrapper = new JSONArray();
-        System.out.println(jsonArrayWrapper);
-        jsonArrayWrapper.add(bodyRequest);
-
-        actor.attemptsTo(Get.resource("orders").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(jsonArrayWrapper).log().all()));
-    }
-
     @Given("{actor} get page users")
     public void userGetPageUsers(Actor actor) {
         actor.whoCan(CallAnApi.at(baseURL));
@@ -194,10 +196,9 @@ public class PresenceeStepDefinitions {
         actor.attemptsTo(Get.resource("users").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
     }
 
-    @Given("{actor} get their information by ID")
-    public void userGetTheirInformationByID(Actor actor) {
-        actor.whoCan(CallAnApi.at(baseURL));
-        JSONObject bodyRequest = new JSONObject();
-        actor.attemptsTo(Get.resource("users/:user_id").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
+    @Then("{actor} verify response is match with json schema {string}")
+    public void userVerifyResponse(Actor actor, String schema) {
+        Response response = SerenityRest.lastResponse();
+        response.then().body(matchesJsonSchemaInClasspath(schema));
     }
 }
