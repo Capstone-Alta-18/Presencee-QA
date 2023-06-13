@@ -137,6 +137,9 @@ public class PresenceeStepDefinitions {
                 actor.attemptsTo(Post.to(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
                 break;
             case "PUT":
+                if (headerList.get(0).equals("path_variable")) {
+                    path = path+"/"+valueList.get("path_variable");
+            }
                 actor.attemptsTo(Put.to(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
                 break;
             case "DELETE":
@@ -200,5 +203,19 @@ public class PresenceeStepDefinitions {
     public void userVerifyResponse(Actor actor, String schema) {
         Response response = SerenityRest.lastResponse();
         response.then().body(matchesJsonSchemaInClasspath(schema));
+    }
+
+    @Given("{actor} get page of Matakuliah")
+    public void userGetPageOfMatakuliah(Actor actor) {
+        actor.whoCan(CallAnApi.at(baseURL));
+        JSONObject bodyRequest = new JSONObject();
+        actor.attemptsTo(Get.resource("matakuliah").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
+    }
+
+    @Given("{actor} get page of single Matakuliah")
+    public void userGetPageOfSingleMatakuliah(Actor actor) {
+        actor.whoCan(CallAnApi.at(baseURL));
+        JSONObject bodyRequest = new JSONObject();
+        actor.attemptsTo(Get.resource("matakuliah").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
     }
 }
