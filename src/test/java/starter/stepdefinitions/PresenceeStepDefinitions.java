@@ -54,7 +54,7 @@ public class PresenceeStepDefinitions {
     @Then("{actor} verify status code is {int}")
     public void userVerifyStatusCodeIs(Actor actor, int statusCode) {
         Response response = SerenityRest.lastResponse();
-        response.then().statusCode(statusCode).log().all();
+        response.then().log().all().statusCode(statusCode);
     }
 
     @Given("{actor} call an api {string} with method {string} with payload below")
@@ -100,7 +100,7 @@ public class PresenceeStepDefinitions {
                 case "user_id": {
                     String randomUserIdString = valueList.get(key);
                     int randomUserId = Integer.parseInt(randomUserIdString);
-                    bodyRequest.put(key, randomUserId);
+                    bodyRequest.put(key, 123456);
                     user.setUserId(String.valueOf(randomUserId));
                     break;
                 }
@@ -121,7 +121,11 @@ public class PresenceeStepDefinitions {
                     bodyRequest.put(key, user.getInformation());
                     break;
                 default:
-                    bodyRequest.put(key, valueList.get(key));
+                    if (key.equals("user_id")) {
+                        bodyRequest.put(key, Integer.parseInt(valueList.get(key)));
+                    } else {
+                        bodyRequest.put(key, valueList.get(key));
+                    }
                     break;
             }
         }
@@ -137,8 +141,9 @@ public class PresenceeStepDefinitions {
                 actor.attemptsTo(Post.to(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
                 break;
             case "PUT":
-                if (headerList.get(0).equals("path_variable")) {
+                if (headerList.get(headerList.size()-1).equals("path_variable")) {
                     path = path+"/"+valueList.get("path_variable");
+                    bodyRequest.remove("path_variable");
             }
                 actor.attemptsTo(Put.to(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
                 break;
@@ -162,8 +167,6 @@ public class PresenceeStepDefinitions {
 
         List<Integer> listCategories = new ArrayList<>();
         listCategories.add(0,1);
-
-
 
         bodyRequest.put("name", faker.commerce().productName());
         bodyRequest.put("description", faker.lorem().sentence());

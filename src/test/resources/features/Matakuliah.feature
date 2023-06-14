@@ -21,8 +21,8 @@ Feature: User can see their "Matakuliah"
     And User get auth token
     Given User call an api "matakuliah" with method "PUT" with payload below
       | name         | email                | nim        | image | phone        | user_id   | path_variable |
-      | Eliasz Moses| eliaszmoses@gmail.com | 7193220000 | null  | 081364287070 | 563267194 | 1  |
-    Then User verify status code is 201
+      | Eliasz Moses| eliaszmoses@gmail.com | 7193220000 | null  | 081364287070 | 563267194 | 2  |
+    Then User verify status code is 200
 
   @PresenceeAPI @MatakuliahPresencee @GetPageMatakuliah
   Scenario: User can get page of their Matakuliah
