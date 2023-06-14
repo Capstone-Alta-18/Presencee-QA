@@ -4,7 +4,7 @@ Feature: User started to use Presencee feature "Mahasiswa"
     Scenario: User create Mahasiswa
     Given User call an api "users/login" with method "POST" with payload below
       | email       | password         |
-      | eliasemoses@gmail.com | 12345678  |
+      | eliasemoses123@gmail.com | 123456789  |
     Then User verify status code is 200
     And User get auth token
     Given User call an api "mahasiswa" with method "POST" with payload below
@@ -16,7 +16,7 @@ Feature: User started to use Presencee feature "Mahasiswa"
     Scenario: User update Mahasiswa
     Given User call an api "users/login" with method "POST" with payload below
       | email       | password         |
-      | eliasemoses@gmail.com | 12345678  |
+      | eliasemoses123@gmail.com | 123456789  |
     Then User verify status code is 200
     And User get auth token
     Given User call an api "mahasiswa" with method "POST" with payload below

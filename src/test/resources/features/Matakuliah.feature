@@ -4,7 +4,7 @@ Feature: User can see their "Matakuliah"
     Scenario: User create their Matakuliah
     Given User call an api "users/login" with method "POST" with payload below
       | email       | password         |
-      | eliasemoses@gmail.com | 12345678  |
+      | eliasemoses@gmail.com | 123456789  |
     Then User verify status code is 200
     And User get auth token
     Given User call an api "matakuliah" with method "POST" with payload below
@@ -16,7 +16,7 @@ Feature: User can see their "Matakuliah"
   Scenario: User update their Matakuliah
     Given User call an api "users/login" with method "POST" with payload below
       | email       | password         |
-      | eliasemoses@gmail.com | 12345678  |
+      | eliasemoses@gmail.com | 123456789  |
     Then User verify status code is 200
     And User get auth token
     Given User call an api "matakuliah" with method "PUT" with payload below
@@ -28,7 +28,7 @@ Feature: User can see their "Matakuliah"
   Scenario: User can get page of their Matakuliah
     Given User call an api "users/login" with method "POST" with payload below
       | email       | password         |
-      | eliasemoses@gmail.com | 12345678  |
+      | eliasemoses@gmail.com | 123456789  |
     Then User verify status code is 200
     And User get auth token
     Given User get page of Matakuliah
@@ -38,7 +38,7 @@ Feature: User can see their "Matakuliah"
   Scenario: User can get page by filling Matakuliah
     Given User call an api "users/login" with method "POST" with payload below
       | email       | password         |
-      | eliasemoses@gmail.com | 12345678  |
+      | eliasemoses123@gmail.com | 123456789  |
     Then User verify status code is 200
     And User get auth token
     Given User get page of single Matakuliah
@@ -48,7 +48,7 @@ Feature: User can see their "Matakuliah"
   Scenario: User delete their subject in Matakuliah
     Given User call an api "users/login" with method "POST" with payload below
       | email       | password         |
-      | eliasemoses@gmail.com | 12345678  |
+      | eliasemoses123@gmail.com | 123456789  |
     Then User verify status code is 200
     And User get auth token
     Given User call an api "mahasiswa" with method "DELETE" with payload below
