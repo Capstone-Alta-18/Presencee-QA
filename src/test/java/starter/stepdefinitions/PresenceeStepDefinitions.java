@@ -138,6 +138,10 @@ public class PresenceeStepDefinitions {
                 actor.attemptsTo(Get.resource(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
                 break;
             case "POST":
+                if (headerList.get(headerList.size()-1).equals("path_variable")) {
+                    path = path + "/" + valueList.get("path_variable");
+                    bodyRequest.remove("path_variable");
+                }
                 actor.attemptsTo(Post.to(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
                 break;
             case "PUT":

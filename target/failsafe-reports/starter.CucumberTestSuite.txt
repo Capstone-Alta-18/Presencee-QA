@@ -1,26 +1,29 @@
 -------------------------------------------------------------------------------
 Test set: starter.CucumberTestSuite
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 124.294 s <<< FAILURE! - in starter.CucumberTestSuite
-starter.CucumberTestSuite  Time elapsed: 124.294 s  <<< ERROR!
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 124.466 s <<< FAILURE! - in starter.CucumberTestSuite
+User can see their jadwal.User want to create their jadwal  Time elapsed: 19.239 s  <<< ERROR!
+java.lang.NumberFormatException: For input string: "2473649774"
+
+starter.CucumberTestSuite  Time elapsed: 124.466 s  <<< ERROR!
 java.lang.RuntimeException: 
 java.io.IOException: HTTP request failed:
 > GET https://messages.cucumber.io/api/reports
 < HTTP/1.1 401 Unauthorized
 < X-Cache: Error from cloudfront
-< x-amz-apigw-id: GhBR1GzwiGYFYNA=
+< x-amz-apigw-id: GhFyXFBKiGYFnhA=
 < Access-Control-Allow-Origin: https://reports.cucumber.io
 < Access-Control-Allow-Methods: GET
 < X-Amz-Cf-Pop: SIN5-C1
 < Connection: keep-alive
-< X-Amzn-Trace-Id: Root=1-6489e271-32c9097660e8d65e07dcf143;Sampled=0;lineage=d7df4ace:0
+< X-Amzn-Trace-Id: Root=1-6489e9a8-2e0800076a72bca4057e396c;Sampled=0;lineage=d7df4ace:0
 < Access-Control-Allow-Headers: Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token
-< Date: Wed, 14 Jun 2023 15:53:22 GMT
-< Via: 1.1 c38127ef40e972ba03fa4e269bbdb780.cloudfront.net (CloudFront)
+< Date: Wed, 14 Jun 2023 16:24:08 GMT
+< Via: 1.1 f448aba82e4fd70230de47f9a261511c.cloudfront.net (CloudFront)
 < Cache-Control: private, no-cache, no-store, must-revalidate
 < Access-Control-Allow-Credentials: true
-< x-amzn-RequestId: 67dca1d6-d0f5-4dbc-9f42-f4dc4770d8a1
-< X-Amz-Cf-Id: 2Ib5LL-UNeApYVr6QMOaACnGHSFvG1yZThWVbK54BeWYMDfTsrN9sA==
+< x-amzn-RequestId: 5faa37c3-7cd8-4d60-b211-f4de99392518
+< X-Amz-Cf-Id: JOjeFP9d7jkYcPRFgEYj3az5zAhn63uronQEhKZIRzI-FdY7ufvg8A==
 < Content-Length: 627
 < Content-Type: text/plain; charset=UTF-8
 [31m[1m┌──────────────────────────────────────────────────────────────┐[0m
@@ -32,19 +35,19 @@ HTTP request failed:
 > GET https://messages.cucumber.io/api/reports
 < HTTP/1.1 401 Unauthorized
 < X-Cache: Error from cloudfront
-< x-amz-apigw-id: GhBR1GzwiGYFYNA=
+< x-amz-apigw-id: GhFyXFBKiGYFnhA=
 < Access-Control-Allow-Origin: https://reports.cucumber.io
 < Access-Control-Allow-Methods: GET
 < X-Amz-Cf-Pop: SIN5-C1
 < Connection: keep-alive
-< X-Amzn-Trace-Id: Root=1-6489e271-32c9097660e8d65e07dcf143;Sampled=0;lineage=d7df4ace:0
+< X-Amzn-Trace-Id: Root=1-6489e9a8-2e0800076a72bca4057e396c;Sampled=0;lineage=d7df4ace:0
 < Access-Control-Allow-Headers: Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token
-< Date: Wed, 14 Jun 2023 15:53:22 GMT
-< Via: 1.1 c38127ef40e972ba03fa4e269bbdb780.cloudfront.net (CloudFront)
+< Date: Wed, 14 Jun 2023 16:24:08 GMT
+< Via: 1.1 f448aba82e4fd70230de47f9a261511c.cloudfront.net (CloudFront)
 < Cache-Control: private, no-cache, no-store, must-revalidate
 < Access-Control-Allow-Credentials: true
-< x-amzn-RequestId: 67dca1d6-d0f5-4dbc-9f42-f4dc4770d8a1
-< X-Amz-Cf-Id: 2Ib5LL-UNeApYVr6QMOaACnGHSFvG1yZThWVbK54BeWYMDfTsrN9sA==
+< x-amzn-RequestId: 5faa37c3-7cd8-4d60-b211-f4de99392518
+< X-Amz-Cf-Id: JOjeFP9d7jkYcPRFgEYj3az5zAhn63uronQEhKZIRzI-FdY7ufvg8A==
 < Content-Length: 627
 < Content-Type: text/plain; charset=UTF-8
 [31m[1m┌──────────────────────────────────────────────────────────────┐[0m
