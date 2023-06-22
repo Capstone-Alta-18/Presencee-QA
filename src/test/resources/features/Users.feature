@@ -4,7 +4,15 @@ Feature: Users started to use Presencee
     Scenario: Users login to Presencee
     Given User call an api "users/login" with method "POST" with payload below
       | email       | password         |
-      | eliasemoses123@gmail.com | 123456789  |
+      | eliasemoses@mail.com | 12345  |
+    Then User verify status code is 200
+    And User get auth token
+
+  @PresenceeAPI @UsersPresencee @LoginAdmin
+  Scenario: Users login to Presencee
+    Given User call an api "users/login" with method "POST" with payload below
+      | email       | password         |
+      | eliasemoses@mail.com | 12345  |
     Then User verify status code is 200
     And User get auth token
 
@@ -59,6 +67,6 @@ Feature: Users started to use Presencee
     And User get auth token
     Given User call an api "users" with method "DELETE" with payload below
       | path_variable       |
-      | 2133866020        |
+      | 3826654783    |
     Then User verify status code is 200
     Then User verify response is match with json schema "deleteuserID.json"

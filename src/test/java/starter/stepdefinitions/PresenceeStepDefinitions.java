@@ -239,4 +239,18 @@ public class PresenceeStepDefinitions {
         JSONObject bodyRequest = new JSONObject();
         actor.attemptsTo(Get.resource("room").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
     }
+
+    @Given("{actor} want to get page mahasiswa")
+    public void userWantToGetPageMahasiswa(Actor actor) {
+        actor.whoCan(CallAnApi.at(baseURL));
+        JSONObject bodyRequest = new JSONObject();
+        actor.attemptsTo(Get.resource("mahasiswa").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
+    }
+
+    @Given("{actor} want to get page dosen")
+    public void userWantToGetPageDosen(Actor actor) {
+        actor.whoCan(CallAnApi.at(baseURL));
+        JSONObject bodyRequest = new JSONObject();
+        actor.attemptsTo(Get.resource("dosen").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
+    }
 }
