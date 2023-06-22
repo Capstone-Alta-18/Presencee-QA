@@ -4,31 +4,31 @@ Feature: User can see their "Matakuliah"
     Scenario: User create their Matakuliah
     Given User call an api "users/login" with method "POST" with payload below
       | email       | password         |
-      | eliasemoses@gmail.com | 123456789  |
+      | eliasemoses@mail.com | 12345  |
     Then User verify status code is 200
     And User get auth token
     Given User call an api "matakuliah" with method "POST" with payload below
-      | name       | Date                 |
-      | Akuntansi  | 2023-06-05T10:00:00Z |
+      | name       | date                 |
+      | Mathematics | 2023-06-05T10:00:00Z |
     Then User verify status code is 201
 
   @PresenceeAPI @MatakuliahPresencee @UpdateMatakuliah
   Scenario: User update their Matakuliah
     Given User call an api "users/login" with method "POST" with payload below
       | email       | password         |
-      | eliasemoses@gmail.com | 123456789  |
+      | eliasemoses@mail.com | 12345  |
     Then User verify status code is 200
     And User get auth token
     Given User call an api "matakuliah" with method "PUT" with payload below
-      | name         | email                | nim        | image | phone        | user_id   | path_variable |
-      | Eliasz Moses| eliaszmoses@gmail.com | 7193220000 | null  | 081364287070 | 563267194 | 2  |
+      | name     | email             | nip        | phone        | image | user_id   | path_variable |
+      | Sunandar | sunan10@gmail.com | 934898498  | 08576768787  |  null    | 1644697485 | 6           |
     Then User verify status code is 200
 
   @PresenceeAPI @MatakuliahPresencee @GetPageMatakuliah
   Scenario: User can get page of their Matakuliah
     Given User call an api "users/login" with method "POST" with payload below
-      | email       | password         |
-      | eliasemoses@gmail.com | 123456789  |
+      | email                 | password |
+      | eliasemoses@mail.com | 12345     |
     Then User verify status code is 200
     And User get auth token
     Given User get page of Matakuliah
@@ -37,8 +37,8 @@ Feature: User can see their "Matakuliah"
   @PresenceeAPI @MatakuliahPresencee @GetSingleMatakuliah
   Scenario: User can get page by filling Matakuliah
     Given User call an api "users/login" with method "POST" with payload below
-      | email       | password         |
-      | eliasemoses123@gmail.com | 123456789  |
+      | email                 | password |
+      | eliasemoses@mail.com | 12345     |
     Then User verify status code is 200
     And User get auth token
     Given User get page of single Matakuliah
@@ -51,7 +51,7 @@ Feature: User can see their "Matakuliah"
       | eliasemoses123@gmail.com | 123456789  |
     Then User verify status code is 200
     And User get auth token
-    Given User call an api "mahasiswa" with method "DELETE" with payload below
+    Given User call an api "matakuliah" with method "DELETE" with payload below
       | path_variable |
       | 4             |
     Then User verify status code is 200
