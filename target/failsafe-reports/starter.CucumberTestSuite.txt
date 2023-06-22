@@ -1,0 +1,54 @@
+-------------------------------------------------------------------------------
+Test set: starter.CucumberTestSuite
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 58.269 s <<< FAILURE! - in starter.CucumberTestSuite
+starter.CucumberTestSuite  Time elapsed: 58.269 s  <<< ERROR!
+java.lang.RuntimeException: 
+java.io.IOException: HTTP request failed:
+> GET https://messages.cucumber.io/api/reports
+< HTTP/1.1 401 Unauthorized
+< X-Cache: Error from cloudfront
+< x-amz-apigw-id: G6aOeG5qiGYF-5w=
+< Access-Control-Allow-Origin: https://reports.cucumber.io
+< Access-Control-Allow-Methods: GET
+< X-Amz-Cf-Pop: KUL50-C2
+< Connection: keep-alive
+< X-Amzn-Trace-Id: Root=1-64940a5c-1cc272873ffc2e9a5833460c;Sampled=0;lineage=d7df4ace:0
+< Access-Control-Allow-Headers: Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token
+< Date: Thu, 22 Jun 2023 08:46:20 GMT
+< Via: 1.1 f908f8570a83f0a9c59c76a38cdba5de.cloudfront.net (CloudFront)
+< Cache-Control: private, no-cache, no-store, must-revalidate
+< Access-Control-Allow-Credentials: true
+< x-amzn-RequestId: 94ff83bd-7a6c-4834-ad71-4b85b67c9401
+< X-Amz-Cf-Id: WuUWEnFyw8jhRSqoRRQeMGbLGfw5n8AaPIi86CodZRyOc_g_Zk2OaA==
+< Content-Length: 627
+< Content-Type: text/plain; charset=UTF-8
+[31m[1m┌──────────────────────────────────────────────────────────────┐[0m
+[31m[1m│[0m Invalid CUCUMBER_PUBLISH_TOKEN: [1msome-secret-token[0m            [31m[1m│[0m
+[31m[1m│[0m Go to [1m[36m[4mhttps://reports.cucumber.io/profile[0m to get your token. [31m[1m│[0m
+[31m[1m└──────────────────────────────────────────────────────────────┘[0m
+Caused by: java.io.IOException: 
+HTTP request failed:
+> GET https://messages.cucumber.io/api/reports
+< HTTP/1.1 401 Unauthorized
+< X-Cache: Error from cloudfront
+< x-amz-apigw-id: G6aOeG5qiGYF-5w=
+< Access-Control-Allow-Origin: https://reports.cucumber.io
+< Access-Control-Allow-Methods: GET
+< X-Amz-Cf-Pop: KUL50-C2
+< Connection: keep-alive
+< X-Amzn-Trace-Id: Root=1-64940a5c-1cc272873ffc2e9a5833460c;Sampled=0;lineage=d7df4ace:0
+< Access-Control-Allow-Headers: Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token
+< Date: Thu, 22 Jun 2023 08:46:20 GMT
+< Via: 1.1 f908f8570a83f0a9c59c76a38cdba5de.cloudfront.net (CloudFront)
+< Cache-Control: private, no-cache, no-store, must-revalidate
+< Access-Control-Allow-Credentials: true
+< x-amzn-RequestId: 94ff83bd-7a6c-4834-ad71-4b85b67c9401
+< X-Amz-Cf-Id: WuUWEnFyw8jhRSqoRRQeMGbLGfw5n8AaPIi86CodZRyOc_g_Zk2OaA==
+< Content-Length: 627
+< Content-Type: text/plain; charset=UTF-8
+[31m[1m┌──────────────────────────────────────────────────────────────┐[0m
+[31m[1m│[0m Invalid CUCUMBER_PUBLISH_TOKEN: [1msome-secret-token[0m            [31m[1m│[0m
+[31m[1m│[0m Go to [1m[36m[4mhttps://reports.cucumber.io/profile[0m to get your token. [31m[1m│[0m
+[31m[1m└──────────────────────────────────────────────────────────────┘[0m
+
