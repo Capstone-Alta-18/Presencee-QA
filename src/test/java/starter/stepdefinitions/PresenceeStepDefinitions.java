@@ -77,7 +77,7 @@ public class PresenceeStepDefinitions {
                 }
                 case "user_id": {
                     String randomUserIdString = valueList.get(key);
-                    int randomUserId = Integer.parseInt(randomUserIdString);
+                    Long randomUserId = Long.parseLong(randomUserIdString);
                     bodyRequest.put(key, 123456);
                     user.setUserId(String.valueOf(randomUserId));
                     break;
@@ -100,7 +100,7 @@ public class PresenceeStepDefinitions {
                     break;
                 default:
                     if (key.equals("user_id")) {
-                        bodyRequest.put(key, Integer.parseInt(valueList.get(key)));
+                        bodyRequest.put(key, Long.parseLong(valueList.get(key)));
                     } else bodyRequest.put(key, valueList.get(key));
                     break;
             }
@@ -196,5 +196,19 @@ public class PresenceeStepDefinitions {
         actor.whoCan(CallAnApi.at(baseURL));
         JSONObject bodyRequest = new JSONObject();
         actor.attemptsTo(Get.resource("dosen").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
+    }
+
+    @Given("{actor} want to get page jadwals")
+    public void userWantToGetPageJadwals(Actor actor) {
+        actor.whoCan(CallAnApi.at(baseURL));
+        JSONObject bodyRequest = new JSONObject();
+        actor.attemptsTo(Get.resource("jadwals").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
+    }
+
+    @Given("{actor} want to get page absen")
+    public void userWantToGetPageAbsen(Actor actor) {
+        actor.whoCan(CallAnApi.at(baseURL));
+        JSONObject bodyRequest = new JSONObject();
+        actor.attemptsTo(Get.resource("absens").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
     }
 }
