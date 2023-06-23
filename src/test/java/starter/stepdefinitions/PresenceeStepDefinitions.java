@@ -17,6 +17,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import starter.data.User;
 
+import javax.print.attribute.URISyntax;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -210,5 +212,20 @@ public class PresenceeStepDefinitions {
         actor.whoCan(CallAnApi.at(baseURL));
         JSONObject bodyRequest = new JSONObject();
         actor.attemptsTo(Get.resource("absens").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
+    }
+
+    @Given("{actor} want to get filter absen")
+    public void userWantToGetFilterAbsen(Actor actor) {
+        actor.whoCan(CallAnApi.at(baseURL));
+        JSONObject bodyRequest = new JSONObject();
+        actor.attemptsTo(Get.resource("absens").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
+    }
+
+    @And("{actor} input the image")
+    public void userInputTheImage(Actor actor) throws URISyntaxException {
+        // File file
+        actor.whoCan(CallAnApi.at(baseURL));
+        JSONObject bodyRequest = new JSONObject();
+        actor.attemptsTo(Get.resource("image").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
     }
 }

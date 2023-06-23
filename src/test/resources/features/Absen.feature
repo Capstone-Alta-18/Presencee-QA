@@ -40,8 +40,50 @@ Feature: User started to use Presencee feature "Absen"
   Scenario: User want to see get page of absen
     Given User call an api "users/login" with method "POST" with payload below
       | email       | password         |
-      | eliasemoses123@gmail.com | 123456789  |
+      | eliasemoses@mail.com | 12345  |
     Then User verify status code is 200
     And User get auth token
     Given User want to get page absen
+    Then User verify status code is 200
+
+  @PresenceeAPI @AbsenPresencee @GetFilterAbsen
+  Scenario: User want to see get filter of absen
+    Given User call an api "users/login" with method "POST" with payload below
+      | email       | password         |
+      | eliasemoses@mail.com | 12345  |
+    Then User verify status code is 200
+    And User get auth token
+    Given User want to get filter absen
+    Then User verify status code is 200
+
+  @PresenceeAPI @AbsenPresencee @GetRiwayat
+  Scenario: User want to see get riwayat
+    Given User call an api "users/login" with method "POST" with payload below
+      | email       | password         |
+      | eliasemoses@mail.com | 12345  |
+    Then User verify status code is 200
+    And User get auth token
+    Given User want to get riwayat
+    Then User verify status code is 200
+
+  @PresenceeAPI @AbsenPresencee @GetRiwayatDashboard
+  Scenario: User want to see get riwayat dashboard
+    Given User call an api "users/login" with method "POST" with payload below
+      | email       | password         |
+      | eliasemoses@mail.com | 12345  |
+    Then User verify status code is 200
+    And User get auth token
+    Given User want to get riwayat dashboard
+    Then User verify status code is 200
+
+  @PresenceeAPI @AbsenPresencee @DeleteAbsen
+  Scenario: User want to delete absen
+    Given User call an api "users/login" with method "POST" with payload below
+      | email       | password         |
+      | eliasemoses123@gmail.com | 123456789  |
+    Then User verify status code is 200
+    And User get auth token
+    Given User call an api "absens" with method "DELETE" with payload below
+      | path_variable  |
+      | 2681319849 |
     Then User verify status code is 200

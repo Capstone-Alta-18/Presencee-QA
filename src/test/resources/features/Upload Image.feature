@@ -7,7 +7,5 @@ Feature: User can upload their Image
       | eliasemoses@mail.com | 12345  |
     Then User verify status code is 200
     And User get auth token
-    Given User call an api "upload" with method "POST" with payload below
-      | image       |
-      |             |
+    And User input the image
     Then User verify status code is 201
