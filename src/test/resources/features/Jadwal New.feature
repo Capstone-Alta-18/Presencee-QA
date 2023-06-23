@@ -1,7 +1,7 @@
 Feature: User can see their Jadwal
 
-  @PresenceeAPI @JadwalPresencee @CreateJadwal
-  Scenario: User want to create their jadwal
+  @PresenceeAPI @JadwalPresencee @CreateJadwalNew
+  Scenario: User want to create their new jadwal
     Given User call an api "users/login" with method "POST" with payload below
       | email       | password         |
       | eliasemoses@mail.com | 12345  |

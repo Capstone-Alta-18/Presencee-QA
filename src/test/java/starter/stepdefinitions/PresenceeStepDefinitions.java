@@ -29,28 +29,6 @@ public class PresenceeStepDefinitions {
     User user = new User();
     //code untuk memperoleh token dari respons API
 
-
-    @Given("{actor} call an api {string} with method {string}")
-    public void callAPI(Actor actor, String path, String method) {
-        actor.whoCan(CallAnApi.at(baseURL));
-
-        switch (method) {
-            case "GET":
-                actor.attemptsTo(Get.resource(path));
-                break;
-            case "POST":
-                actor.attemptsTo(Post.to(path));
-                break;
-            case "PUT":
-                actor.attemptsTo(Put.to(path));
-                break;
-            case "DELETE":
-                actor.attemptsTo(Delete.from(path));
-                break;
-            default:
-                throw new IllegalStateException("Unknown method");
-        }
-    }
     @Then("{actor} verify status code is {int}")
     public void userVerifyStatusCodeIs(Actor actor, int statusCode) {
         Response response = SerenityRest.lastResponse();
@@ -123,9 +101,7 @@ public class PresenceeStepDefinitions {
                 default:
                     if (key.equals("user_id")) {
                         bodyRequest.put(key, Integer.parseInt(valueList.get(key)));
-                    } else {
-                        bodyRequest.put(key, valueList.get(key));
-                    }
+                    } else bodyRequest.put(key, valueList.get(key));
                     break;
             }
         }
@@ -162,42 +138,10 @@ public class PresenceeStepDefinitions {
         }
     }
 
-    @Given("{actor} is create a new product")
-    public void userIsCreateANewProduct(Actor actor) {
-        Faker faker = new Faker(new Locale("in=ID"));
-        actor.whoCan(CallAnApi.at(baseURL));
-
-        JSONObject bodyRequest = new JSONObject();
-
-        List<Integer> listCategories = new ArrayList<>();
-        listCategories.add(0,1);
-
-        bodyRequest.put("name", faker.commerce().productName());
-        bodyRequest.put("description", faker.lorem().sentence());
-        bodyRequest.put("price", 200);
-        bodyRequest.put("categories",listCategories);
-
-        actor.attemptsTo(Post.to("products").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
-    }
-
     @And("{actor} get auth token")
     public void userGetAuthToken(Actor actor) {
         Response response = SerenityRest.lastResponse();
         user.setToken(response.path("token"));
-    }
-    @Given("{actor} is create a new order")
-    public void userIsCreateANewOrder(Actor actor) {
-        actor.whoCan(CallAnApi.at(baseURL));
-        JSONObject bodyRequest = new JSONObject();
-        JSONArray jsonArrayWrapper = new JSONArray();
-
-        bodyRequest.put("product_id",2);
-        bodyRequest.put("quantity",1);
-        System.out.println(bodyRequest);
-        System.out.println(jsonArrayWrapper);
-        jsonArrayWrapper.add(bodyRequest);
-
-        actor.attemptsTo(Post.to("orders").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(jsonArrayWrapper).log().all()));
     }
     @Given("{actor} get page users")
     public void userGetPageUsers(Actor actor) {
