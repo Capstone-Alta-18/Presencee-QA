@@ -67,6 +67,6 @@ Feature: Users started to use Presencee
     And User get auth token
     Given User call an api "users" with method "DELETE" with payload below
       | path_variable       |
-      | 3826654783    |
+      | 663680983   |
     Then User verify status code is 200
     Then User verify response is match with json schema "deleteuserID.json"
