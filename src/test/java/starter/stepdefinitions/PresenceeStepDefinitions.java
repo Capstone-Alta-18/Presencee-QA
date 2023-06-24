@@ -79,7 +79,7 @@ public class PresenceeStepDefinitions {
                 }
                 case "user_id": {
                     String randomUserIdString = valueList.get(key);
-                    Long randomUserId = Long.parseLong(randomUserIdString);
+                    int randomUserId = Integer.parseInt(randomUserIdString);
                     bodyRequest.put(key, 123456);
                     user.setUserId(String.valueOf(randomUserId));
                     break;
@@ -102,8 +102,10 @@ public class PresenceeStepDefinitions {
                     break;
                 default:
                     if (key.equals("user_id")) {
-                        bodyRequest.put(key, Long.parseLong(valueList.get(key)));
-                    } else bodyRequest.put(key, valueList.get(key));
+                        bodyRequest.put(key, Integer.parseInt(valueList.get(key)));
+                    } else {
+                        bodyRequest.put(key, valueList.get(key));
+                    }
                     break;
             }
         }
@@ -124,7 +126,7 @@ public class PresenceeStepDefinitions {
                 break;
             case "PUT":
                 if (headerList.get(headerList.size()-1).equals("path_variable")) {
-                    path = path+"/"+valueList.get("path_variable");
+                    path = path + "/" + valueList.get("path_variable");
                     bodyRequest.remove("path_variable");
             }
                 actor.attemptsTo(Put.to(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));

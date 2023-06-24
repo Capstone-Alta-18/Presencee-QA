@@ -19,10 +19,10 @@ Feature: User started to use Presencee feature "Dosen"
       | eliasemoses123@gmail.com | 123456789  |
     Then User verify status code is 200
     And User get auth token
-    Given User call an api "dosen" with method "POST" with payload below
-      | name         | email                | nip        | image | phone      | user_id    |
-      | Eliasz Moses| eliaszmoses@gmail.com | 2001243111 | null  | 2001243111 | 563267194 |
-    Then User verify status code is 201
+    Given User call an api "dosen" with method "PUT" with payload below
+      | name         | email                | nip        | image | phone      | user_id    | path_variable |
+      | Eliasz Moses| eliaszmoses@gmail.com | 2001243111 | null  | 2001243111 | 563267194 | 40 |
+    Then User verify status code is 200
 
   @PresenceeAPI @DosenPresencee @GetPageDosen
   Scenario: User want to see get page of dosen
