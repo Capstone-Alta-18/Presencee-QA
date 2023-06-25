@@ -18,12 +18,12 @@ import net.serenitybdd.screenplay.rest.interactions.Put;
 import org.json.simple.JSONObject;
 import starter.data.User;
 
-
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+
 
 
 public class PresenceeStepDefinitions {
@@ -113,27 +113,27 @@ public class PresenceeStepDefinitions {
         switch (method) {
             case "GET":
                 if (headerList.get(0).equals("path_variable")) {
-                    path = path+"/"+valueList.get("path_variable");
+                    path = path + "/" + valueList.get("path_variable");
                 }
                 actor.attemptsTo(Get.resource(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
                 break;
             case "POST":
-                if (headerList.get(headerList.size()-1).equals("path_variable")) {
+                if (headerList.get(headerList.size() - 1).equals("path_variable")) {
                     path = path + "/" + valueList.get("path_variable");
                     bodyRequest.remove("path_variable");
                 }
                 actor.attemptsTo(Post.to(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
                 break;
             case "PUT":
-                if (headerList.get(headerList.size()-1).equals("path_variable")) {
+                if (headerList.get(headerList.size() - 1).equals("path_variable")) {
                     path = path + "/" + valueList.get("path_variable");
                     bodyRequest.remove("path_variable");
-            }
+                }
                 actor.attemptsTo(Put.to(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
                 break;
             case "DELETE":
                 if (headerList.get(0).equals("path_variable")) {
-                    path = path+"/"+valueList.get("path_variable");
+                    path = path + "/" + valueList.get("path_variable");
                 }
                 actor.attemptsTo(Delete.from(path).with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
                 break;
@@ -147,6 +147,7 @@ public class PresenceeStepDefinitions {
         Response response = SerenityRest.lastResponse();
         user.setToken(response.path("token"));
     }
+
     @Given("{actor} get page users")
     public void userGetPageUsers(Actor actor) {
         actor.whoCan(CallAnApi.at(baseURL));
@@ -223,10 +224,16 @@ public class PresenceeStepDefinitions {
         actor.attemptsTo(Get.resource("absens").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
     }
 
-    @And("{actor} upload the image")
-    public void userInputTheImage(Actor actor, String image) {
+    @And("{actor} call an api {string} with method {string}")
+    public void userInputTheImage(Actor actor, String path, String method) {
         actor.whoCan(CallAnApi.at(baseURL));
+        File file = new File(System.getProperty("user.dir") + "/src/test/resources/images/IMG_20190427_191602_324.jpg");
 
+        if (method.equals("POST")) {
+            actor.attemptsTo(Post.to(path).with(request -> request.contentType("multipart/form-data").multiPart("image_url", file, "image/jpeg")));
+        } else {
+            throw new IllegalStateException("Unknown method");
+        }
     }
 
     @Given("{actor} want to get riwayat")

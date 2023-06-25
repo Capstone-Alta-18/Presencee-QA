@@ -35,16 +35,12 @@ public class User {
         this.token = token;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    String email = "sau.hills@hotmail.com";
-    String password = "w0sqdmgf3m3s2u";
+    String email;
+    String password;
     String fullName;
     String token;
 
