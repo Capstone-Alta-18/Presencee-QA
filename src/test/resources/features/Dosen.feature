@@ -21,7 +21,7 @@ Feature: User started to use Presencee feature "Dosen"
     And User get auth token
     Given User call an api "dosen" with method "PUT" with payload below
       | name         | email                | nip        | image | phone      | user_id    | path_variable |
-      | Eliasz Moses| eliaszmoses@gmail.com | 2001243111 | null  | 2001243111 | 563267194 | 40 |
+      | Eliasz Moses| eliaszmoses@gmail.com | 2001243111 | null  | 2001243111 | 563267194 | 42 |
     Then User verify status code is 200
 
   @PresenceeAPI @DosenPresencee @GetPageDosen

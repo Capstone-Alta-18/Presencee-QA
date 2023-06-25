@@ -85,5 +85,5 @@ Feature: User started to use Presencee feature "Absen"
     And User get auth token
     Given User call an api "absens" with method "DELETE" with payload below
       | path_variable  |
-      | 2681319849 |
+      | 3475855483 |
     Then User verify status code is 200

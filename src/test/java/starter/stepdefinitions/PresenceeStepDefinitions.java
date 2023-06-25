@@ -1,6 +1,7 @@
 package starter.stepdefinitions;
 
 import com.github.javafaker.Faker;
+import com.github.javafaker.File;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -13,18 +14,17 @@ import net.serenitybdd.screenplay.rest.interactions.Delete;
 import net.serenitybdd.screenplay.rest.interactions.Get;
 import net.serenitybdd.screenplay.rest.interactions.Post;
 import net.serenitybdd.screenplay.rest.interactions.Put;
-import org.json.simple.JSONArray;
+
 import org.json.simple.JSONObject;
 import starter.data.User;
 
-import javax.print.attribute.URISyntax;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+
 
 public class PresenceeStepDefinitions {
     String baseURL = "http://testing.biaracmpny.my.id/v1/";
@@ -223,11 +223,31 @@ public class PresenceeStepDefinitions {
         actor.attemptsTo(Get.resource("absens").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
     }
 
-    @And("{actor} input the image")
-    public void userInputTheImage(Actor actor) throws URISyntaxException {
-        // File file
+    @And("{actor} upload the image")
+    public void userInputTheImage(Actor actor, String image) {
+        actor.whoCan(CallAnApi.at(baseURL));
+
+    }
+
+    @Given("{actor} want to get riwayat")
+    public void userWantToGetRiwayat(Actor actor) {
         actor.whoCan(CallAnApi.at(baseURL));
         JSONObject bodyRequest = new JSONObject();
-        actor.attemptsTo(Get.resource("image").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
+        actor.attemptsTo(Get.resource("absens/riwayat?page=1&limit=10&absen_id=0&user_id=0&mahasiswa_id=2&jadwal_id=0&created_after=2023-06-02T15:04:05Z&created_before=2023-06-20T15:04:05Z&is_konfirmasi=true").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
+    }
+
+    @Given("{actor} want to get riwayat dashboard")
+    public void userWantToGetRiwayatDashboard(Actor actor) {
+        actor.whoCan(CallAnApi.at(baseURL));
+        JSONObject bodyRequest = new JSONObject();
+        actor.attemptsTo(Get.resource("absens/dashboard?page=1&limit=10&absen_id=0&user_id=0&mahasiswa_id=0&jadwal_id=0&created_after=2023-06-02T15:04:05Z&created_before=2023-06-20T15:04:05Z&is_konfirmasi=true").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
+
+    }
+
+    @Given("{actor} want to get filter jadwal")
+    public void userWantToGetFilterJadwal(Actor actor) {
+        actor.whoCan(CallAnApi.at(baseURL));
+        JSONObject bodyRequest = new JSONObject();
+        actor.attemptsTo(Get.resource("jadwals").with(request -> request.header("Authorization", "Bearer " + user.getToken()).body(bodyRequest).log().all()));
     }
 }

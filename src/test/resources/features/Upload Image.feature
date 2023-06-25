@@ -7,5 +7,5 @@ Feature: User can upload their Image
       | eliasemoses@mail.com | 12345  |
     Then User verify status code is 200
     And User get auth token
-    And User input the image
+    And User upload the image
     Then User verify status code is 201
