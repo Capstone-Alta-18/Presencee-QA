@@ -1,7 +1,6 @@
 package starter.stepdefinitions;
 
 import com.github.javafaker.Faker;
-import com.github.javafaker.File;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -18,6 +17,7 @@ import net.serenitybdd.screenplay.rest.interactions.Put;
 import org.json.simple.JSONObject;
 import starter.data.User;
 
+import java.io.File;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -227,10 +227,10 @@ public class PresenceeStepDefinitions {
     @And("{actor} call an api {string} with method {string}")
     public void userInputTheImage(Actor actor, String path, String method) {
         actor.whoCan(CallAnApi.at(baseURL));
-        File file = new File(System.getProperty("user.dir") + "/src/test/resources/images/IMG_20190427_191602_324.jpg");
+        File file = new java.io.File(System.getProperty("user.dir") + "/src/test/resources/images/IMG_20190427_191602_324.jpg");
 
         if (method.equals("POST")) {
-            actor.attemptsTo(Post.to(path).with(request -> request.contentType("multipart/form-data").multiPart("image_url", file, "image/jpeg")));
+            actor.attemptsTo(Post.to(path).with(request -> request.contentType("multipart/form-data").multiPart("IMG_20190427_191602_324", file, "image/jpeg")));
         } else {
             throw new IllegalStateException("Unknown method");
         }

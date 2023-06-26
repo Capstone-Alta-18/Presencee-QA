@@ -244,7 +244,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: net.serenity-bdd:serenity-screenplay-rest:3.6.21" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: net.serenity-bdd:serenity-rest-assured:3.6.21" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.groovy:groovy-json:4.0.10" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.groovy:groovy-xml:4.0.10" level="project" />
     <orderEntry type="library" name="Maven: io.rest-assured:json-schema-validator:5.3.0" level="project" />
     <orderEntry type="library" name="Maven: com.github.java-json-tools:json-schema-validator:2.2.14" level="project" />
     <orderEntry type="library" name="Maven: com.github.java-json-tools:jackson-coreutils-equivalence:1.0" level="project" />
@@ -263,14 +262,12 @@
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:android:1.23" level="project" />
     <orderEntry type="library" name="Maven: com.github.mifmif:generex:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: dk.brics.automaton:automaton:1.11-8" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.rest-assured:rest-assured:4.3.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.groovy:groovy:3.0.7" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.groovy:groovy-xml:3.0.7" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.httpcomponents:httpmime:4.5.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: io.rest-assured:rest-assured:5.3.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.groovy:groovy-xml:4.0.6" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.httpcomponents:httpmime:4.5.13" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.ccil.cowan.tagsoup:tagsoup:1.2.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.rest-assured:json-path:4.3.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.groovy:groovy-json:3.0.7" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.rest-assured:rest-assured-common:4.3.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.rest-assured:xml-path:4.3.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: io.rest-assured:json-path:5.3.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: io.rest-assured:rest-assured-common:5.3.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: io.rest-assured:xml-path:5.3.0" level="project" />
   </component>
 </module>
