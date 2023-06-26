@@ -65,5 +65,5 @@ Feature: User can see their Jadwal
     And User get auth token
     Given User call an api "jadwals" with method "DELETE" with payload below
       | path_variable  |
-      | 3303930005 |
+      | 2991094072 |
     Then User verify status code is 200
